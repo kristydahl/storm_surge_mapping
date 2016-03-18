@@ -22,6 +22,7 @@ def make_directories(location):
     os.mkdir('roads')
     os.mkdir('bases')
     os.mkdir('water')
+    os.mkdir('world_water')
     os.mkdir('states')
     gdb_name = str(location + '.gdb')
     arcpy.CreateFileGDB_management(location_dir, gdb_name)

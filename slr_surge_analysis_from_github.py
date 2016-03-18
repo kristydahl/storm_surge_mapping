@@ -147,7 +147,7 @@ def extend_surge(location,slosh_file,outname):
         print('saved' + str(outname))
 
 def run_array_of_locations():
-    all_locations_array = [['pascagoula', 'c1_high_null','c1_high_null_extended'],['pascagoula', 'c2_high_null','c2_high_null_extended'],['pascagoula', 'c3_high_null','c3_high_null_extended'],['pascagoula', 'c4_high_null','c4_high_null_extended'],['pascagoula', 'c5_high_null','c5_high_null_extended']] # UPDATE ARRAY!
+    all_locations_array = [['sandy_hook', 'c1_high_null','c1_high_null_extended'],['sandy_hook', 'c2_high_null','c2_high_null_extended'],['sandy_hook', 'c3_high_null','c3_high_null_extended'],['sandy_hook', 'c4_high_null','c4_high_null_extended']] # UPDATE ARRAY!
     print('all_locations_array: ')
     print(all_locations_array)
     print('')
@@ -243,13 +243,11 @@ def region_group(location, slosh_file, dem_file, slr_file):
     surfaces = surge_surfaces(location, slosh_file, dem_file, slr_file)
 
     inputs_to_rg = []
-    print inputs_to_rg
     region_grouped_files = []
 
     for surface in surfaces:
         fullname = str(surface)
         filename = os.path.basename(fullname)
-        print 'performing region group for: ' + filename
         outname_1 = (paths['results'] + "/" + "all_1_" + filename)
 
         # Convert raster so area has value of 1
@@ -263,7 +261,6 @@ def region_group(location, slosh_file, dem_file, slr_file):
         outRegionGrp = RegionGroup(input_to_rg, "EIGHT", "WITHIN")
         outname_rg = (paths['results'] + str("/rg_" + filename))
         outRegionGrp.save(outname_rg)
-        print 'saved: ' + outname_rg
         region_grouped_files.append(outRegionGrp)
 
     print("Region grouping done")
@@ -285,11 +282,10 @@ def extract(location, slosh_file, dem_file, slr_file):
         fullname = str(rg_file)
         #print('fullname is ' + fullname)
         filename = os.path.basename(fullname)
-        print('filename is ' + filename)
+        #print('filename is ' + filename)
         #outname = (paths['results'] + "/" + str("extract_" + filename))
-        outname_extract = (paths['results'] + str('/ex_' + filename))
-        #outname_extract = 'C:/Users/kristydahl/Desktop/GIS_data/military_bases/kings_bay/' + filename + '.tif'
-        print('outname is ' + outname_extract)
+        outname = str('extract_' + filename)
+        #print('outname is ' + outname)
 
         arr = arcpy.da.FeatureClassToNumPyArray(fullname, ('Value', 'Count'))
         count = arr['Count']
@@ -298,12 +294,11 @@ def extract(location, slosh_file, dem_file, slr_file):
         value_to_extract = str(value[index_to_extract])
 
         inSQLClause = 'Value =' + value_to_extract
-        print('Extracting ' + value_to_extract + ' from ' + filename)
+        print('Extracting ' + value_to_extract + 'from ' + filename)
 
         attExtract = ExtractByAttributes(fullname, inSQLClause)
-        attExtract.save(outname_extract)
+        attExtract.save(outname)
         extracted_files.append(attExtract)
-        print('saved extract of ' + filename)
     print('Extracted connected areas')
 
     return{'extracted_files': extracted_files}
@@ -313,11 +308,6 @@ def extract(location, slosh_file, dem_file, slr_file):
 
 # Convert to polygon (for surge area maps)
 def finalize(location, slosh_file, dem_file, slr_file):
-
-    paths = set_file_paths(location, slosh_file, dem_file)
-    arcpy.env.workspace = paths['results']
-    print(paths['results'])
-
     print('Finalizing')
     print('Getting Extracts')
     extracts = extract(location, slosh_file, dem_file, slr_file)
@@ -350,7 +340,7 @@ def depth_maps(location, slosh_file, dem_file, slr_file): #Use this one.
 
     surfaces = arcpy.ListRasters(str('c*diff'))
     print(surfaces)
-    extracts = arcpy.ListRasters(str('ex_*c*diff*'))
+    extracts = arcpy.ListRasters(str('extract*c*diff*'))
     print(extracts)
     surfaces_extracts = numpy.column_stack((surfaces, extracts))
     print(surfaces_extracts)
@@ -402,8 +392,7 @@ def depth_maps(location, slosh_file, dem_file, slr_file): #Use this one.
 
 # This method runs finalize, region group, extract, and depth_maps
 def run_finalize_and_depth_maps_for_array_of_locations():
-    all_locations_array = [['pascagoula','ms8mom.shp','pascagoula_19as_clip.tif','pascagoula_slr_data_ih.csv'],['pascagoula','ms8mom.shp','pascagoula_19as_clip.tif','pascagoula_slr_data_h.csv']] # UPDATE ARRAY!
-
+    all_locations_array = [['eglin', 'ep3mom.shp','full_mosaic_agg_setnull.tif','eglin_slr_data_ih.csv'],['eglin', 'ep3mom.shp','full_mosaic_agg_setnull.tif','eglin_slr_data_h.csv']] # UPDATE ARRAY!
     print('all_locations_array: ')
     print(all_locations_array)
     print('')
@@ -423,4 +412,3 @@ def run_finalize_and_depth_maps_for_array_of_locations():
 
         finalize(location, slosh_file, dem_file, slr_file)
         depth_maps(location, slosh_file, dem_file, slr_file)
-

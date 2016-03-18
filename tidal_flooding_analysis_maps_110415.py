@@ -40,7 +40,7 @@ def water_surfaces(location, dem_file, slr_file):
         value = row[1]
         projection=row[2]
         print(row)
-        surface = Con(Raster(dem)/0.3048 <=row[1], 1) #Use DEM with units of meters and SLR data with units of feet!
+        surface = Con(Raster(dem)/0.3048 <=row[1], 1) #Use DEM in meters and flood level in feet!!
         outname = (paths['results'] + str("/" + 'tf_extent' + "_" + str(int(row[0]))+ '_' + str(row[2])))
         surface.save(outname)
         surfaces.append(surface)
@@ -141,14 +141,14 @@ def region_group_extract(location, dem_file,slr_file):
 
 def create_maps(location,projection):
 
-    location_path = os.path.join('C:/Users/kristydahl/Desktop/GIS_data/military_bases',location)
+    location_path = os.path.join('C:/Users/kristydahl/Desktop/GIS_data/UCS_tidal_flooding_maps',location)
     map_path = os.path.join(location_path,'map_docs')
     sym_layers_path = os.path.join(location_path, 'symbology_layers')
     gdb = str(location + '.gdb')
     results_path = os.path.join(location_path, gdb)
     arcpy.env.workspace = results_path
 
-    testmap = os.path.join(location_path, 'testmap.mxd')
+    testmap = os.path.join(location_path, 'testmap_2col_tidal_flooding.mxd')
     sym_layer = os.path.join(sym_layers_path,'water_style.lyr')
     print(sym_layer)
 
@@ -174,7 +174,7 @@ def create_maps(location,projection):
 
 def add_common_layers(location,dem_file):
 
-    location_path = os.path.join('C:/Users/kristydahl/Desktop/GIS_data/military_bases',location)
+    location_path = os.path.join('C:/Users/kristydahl/Desktop/GIS_data/UCS_tidal_flooding_maps',location)
     folders_path = os.path.join(location_path, 'general_map_elements')
     folders = glob.glob1(folders_path,'*')
 

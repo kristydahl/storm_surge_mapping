@@ -57,7 +57,7 @@ def add_common_layers(location):
     folders = glob.glob1(folders_path,'*')
 
     map_path = os.path.join(location_path,'map_docs')
-    maps = glob.glob1(map_path,'all_cats_depth_map_2050_IH.mxd') # Change wildcard here if only adding layers to certain mxds
+    maps = glob.glob1(map_path,'all_cats_depth_map_2100_IH.mxd') # Change wildcard here if only adding layers to certain mxds
 
     roads_path = os.path.join(folders_path,'roads')
     print roads_path
@@ -82,13 +82,12 @@ def add_common_layers(location):
         legend.autoAdd = False
         each_map_no_ext = os.path.splitext(map_with_full_path)
 
-        order_i_want = ['kings_bay_area_water.shp','roads_clipped.shp','places.shp','tl_2014_us_mil.shp'] #need to change water file name to something standard
+        order_i_want = ['area_water.shp','World_Seas.shp','roads_clipped.shp','places.shp','tl_2014_us_mil.shp'] #need to change water file name to something standard
 
         for layer in order_i_want:
             for folder in folders:
                 full_folder_path = os.path.join(folders_path,folder)
                 shp = glob.glob1(full_folder_path,'*.shp')
-
                 for i in shp:
 
                     shp_with_full_path = os.path.join(full_folder_path,i)
