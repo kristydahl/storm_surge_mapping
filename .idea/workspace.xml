@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="373947f7-2db9-4b45-874e-bed32fbce014" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/inundated_area_analysis.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/inundated_area_analysis_022916.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/add_common_layers_testing.py" afterPath="$PROJECT_DIR$/add_common_layers_testing.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/create_allcat_surge_maps_102915.py" afterPath="$PROJECT_DIR$/create_allcat_surge_maps_102915.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/make_directories.py" afterPath="$PROJECT_DIR$/make_directories.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/slr_surge_analysis_102915.py" afterPath="$PROJECT_DIR$/slr_surge_analysis_102915.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tidal_flooding_analysis_maps_110415.py" afterPath="$PROJECT_DIR$/tidal_flooding_analysis_maps_110415.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="373947f7-2db9-4b45-874e-bed32fbce014" name="Default" comment="" />
     <ignored path="storm_surge_mapping.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
