@@ -1,1 +1,1 @@
-Test readme
+A collection of scripts developed for mapping storm surge using MOMs from the NOAA SLOSH model as well as combined storm surge and sea level rise. Developed on contract for the Union of Concerned Scientists.
